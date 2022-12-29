@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1081606663872",
+    "project_id": "mobileprogramming-c9890",
+    "storage_bucket": "mobileprogramming-c9890.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081606663872:android:fdf03e5c002696bdf8c725",
+        "android_client_info": {
+          "package_name": "com.example.lanquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081606663872-5a864auk3dpaihfhl1jpe9n2994h71lj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lanquiz",
+            "certificate_hash": "5a5c5f9bad9433ffd83302b8b13b0850a54018c9"
+          }
+        },
+        {
+          "client_id": "1081606663872-b3ebjj8em9s9bvfnbtj84n0iiu2siet9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiUhiQO7ijGO7sJkg1m1CYWYQRV6agSOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081606663872-b3ebjj8em9s9bvfnbtj84n0iiu2siet9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
