@@ -1,4 +1,5 @@
-import 'package:lanquiz/home_page.dart';
+import 'package:lanquiz/login/home_page.dart';
+import 'package:lanquiz/login/splash/animated_splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Lanquiz',
-      home: Home(),
+      debugShowCheckedModeBanner: false,
+      home: SplashScreenHAnimated(),
     );
   }
 }

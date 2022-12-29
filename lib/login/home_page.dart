@@ -2,6 +2,7 @@ import 'package:lanquiz/components/default_button.dart';
 import 'package:lanquiz/components/default_textfield.dart';
 import 'package:lanquiz/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class Home extends StatefulWidget {
@@ -28,14 +29,24 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 50),
+              SizedBox(height: getHeight/50),
 
               const Icon(
                 Icons.lock,
                 size: 100,
               ),
 
-              const SizedBox(height: 50),
+              SizedBox(height: getHeight/25),
+
+              Text(
+                'LANQUIZ',
+                style: GoogleFonts.bebasNeue(
+                  color: Colors.grey[700],
+                  fontSize: 16,
+                ),
+              ),
+
+              SizedBox(height: getHeight/25),
 
               Text(
                 'Welcome back you\'ve been missed!',
@@ -45,7 +56,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              SizedBox(height: getHeight/25),
 
               defaultTextfield(
                 controller: emailController,
@@ -53,7 +64,7 @@ class _HomeState extends State<Home> {
                 obscureText: false,
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: getHeight/10),
 
               defaultTextfield(
                 controller: passwordController,
@@ -61,7 +72,7 @@ class _HomeState extends State<Home> {
                 obscureText: true,
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: getHeight/10),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -76,15 +87,18 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              SizedBox(height: getHeight/50),
 
               defaultButton(
-                onTap: signUserIn,
+                onPress: () {
+                  signUserIn();
+                },
+                text: 'Sign In',
               ),
 
-              const SizedBox(height: 50),
+              SizedBox(height: getHeight/50),
 
-              const SizedBox(height: 50),
+              SizedBox(height: getHeight/50),
 
               // not a member? register now
               Row(
