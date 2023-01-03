@@ -25,7 +25,7 @@ class _registerFormState extends State<registerForm> {
   final passwordController = TextEditingController();
 
   final _validationKey = GlobalKey<FormState>();
-  bool fieldCorrect =
+  bool fieldCorrect = false;
   final nameFocus = FocusNode();
   final surnameFocus = FocusNode();
   final emailFocus = FocusNode();
