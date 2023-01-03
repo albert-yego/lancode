@@ -1,9 +1,12 @@
-import 'package:lanquiz/login/home_page.dart';
+import 'package:lanquiz/login/login.dart';
 import 'package:lanquiz/login/splash/animated_splash.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Lanquiz',
       debugShowCheckedModeBanner: false,
-      home: SplashScreenHAnimated(),
+      home: SplashScreenLAnimated(),
     );
   }
 }
