@@ -58,6 +58,7 @@ class _Question_PageState extends State<Question_Page> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+
           leading: IconButton(
               onPressed: () {Navigator.push(
                 context,
@@ -67,8 +68,10 @@ class _Question_PageState extends State<Question_Page> {
                 Icons.arrow_back_ios,
                 color: Colors.black,
               )),
+
           backgroundColor: Colors.grey[300],
           elevation: 0,
+
         ),
         body: Column(
           children: [
@@ -117,6 +120,35 @@ class _Question_PageState extends State<Question_Page> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left:15,right: 10),
+              child: Container(
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment:CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "a) ${MyTest.asikki()}",
+                      style: (TextStyle(fontSize: 25)),
+                    ),
+                    Text(
+                      "b) ${MyTest.bsikki()}",
+                      style: (TextStyle(fontSize: 25)),
+                    ),
+                    Text(
+                      "c) ${MyTest.csikki()}",
+                      style: (TextStyle(fontSize: 25)),
+                    ),
+                    Text(
+                      "d) ${MyTest.dsikki()}",
+                      style: (TextStyle(fontSize: 25)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
             Expanded(
               flex: 1,
               child: Row(
@@ -126,40 +158,86 @@ class _Question_PageState extends State<Question_Page> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (MyTest.count == 11) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Result()),
-                            );
-                          } else {
-                            setState(() {
-                              MyTest.checkQuestion("a");
-                            });
-                          }
-                        },
-                        child: Text(MyTest.asikki()),
+                      child: Container(
+                        child: MaterialButton(
+                          onPressed: () {
+                            if (MyTest.count == 11) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Result()),
+                              );
+                            } else {
+                              setState(() {
+                                MyTest.checkQuestion("a");
+                              });
+                            }
+                          },
+
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [Color(0xFF9C27B0), Color(0XFFF42A5F5)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+
+                            ),
+                            child: Container(
+                              constraints: BoxConstraints(minWidth: 300.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "a",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (MyTest.count == 11) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Result()),
-                            );
-                          } else {
-                            setState(() {
-                              MyTest.checkQuestion("b");
-                            });
-                          }
-                        },
-                        child: Text(MyTest.bsikki()),
+                      child: Container(
+                        child: MaterialButton(
+                          onPressed: () {
+                            if (MyTest.count == 11) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Result()),
+                              );
+                            } else {
+                              setState(() {
+                                MyTest.checkQuestion("b");
+                              });
+                            }
+                          },
+
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [Color(0xFF9C27B0), Color(0XFFF42A5F5)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+
+                            ),
+                            child: Container(
+                              constraints: BoxConstraints(minWidth: 300.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "b",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -175,33 +253,56 @@ class _Question_PageState extends State<Question_Page> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (MyTest.count == 11) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Result()),
-                            );
-                          } else {
-                            setState(() {
-                              MyTest.checkQuestion("c");
-                            });
-                          }
-                        },
-                        child: Text(MyTest.csikki()),
+                      child: Container(
+                        child: MaterialButton(
+                          onPressed: () {
+                            if (MyTest.count == 11) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Result()),
+                              );
+                            } else {
+                              setState(() {
+                                MyTest.checkQuestion("c");
+                              });
+                            }
+                          },
+
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [Color(0xFF9C27B0), Color(0XFFF42A5F5)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+
+                            ),
+                            child: Container(
+                              constraints: BoxConstraints(minWidth: 300.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "c",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
+                      child: Container(
+                        child: MaterialButton(
                           onPressed: () {
                             if (MyTest.count == 11) {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => Result()),
+                                MaterialPageRoute(builder: (context) => Result()),
                               );
                             } else {
                               setState(() {
@@ -209,7 +310,30 @@ class _Question_PageState extends State<Question_Page> {
                               });
                             }
                           },
-                          child: Text(MyTest.dsikki())),
+
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [Color(0xFF9C27B0), Color(0XFFF42A5F5)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+
+                            ),
+                            child: Container(
+                              constraints: BoxConstraints(minWidth: 300.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "d",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
