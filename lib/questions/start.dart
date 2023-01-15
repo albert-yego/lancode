@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lancode/question_page.dart';
+import 'package:lancode/questions/question_page.dart';
 
 import 'Questions.dart';
-import 'main.dart';
 
 class Start extends StatefulWidget {
   const Start({Key? key}) : super(key: key);

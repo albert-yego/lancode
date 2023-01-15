@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lancode/main.dart';
-import 'package:lancode/question_page.dart';
-import 'package:lancode/start.dart';
+import 'package:lancode/questions/question_page.dart';
+import 'package:lancode/questions/start.dart';
 
 
 import 'Questions.dart';

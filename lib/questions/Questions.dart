@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lancode/result.dart';
+import 'package:lancode/questions/result.dart';
 
 import 'soru_yapısı.dart';
 

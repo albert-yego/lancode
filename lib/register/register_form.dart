@@ -73,68 +73,19 @@ class _registerFormState extends State<registerForm> {
                   if (nameController.text.length == 0) {
                     nameFocus.requestFocus();
                   } else if (surnameController.text.length == 0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: CustomSnackBarContent(
-                            errorMessage:
-                                "You didn't enter your surname"),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ),
-                    );
+                    surnameFocus.requestFocus();
                   } else if (phoneNumberController.text.length == 0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: CustomSnackBarContent(
-                        errorMessage: "You didn't enter your phone number"),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ),
-                    );
+                    phoneNumberFocus.requestFocus();
                   } else if (phoneNumberController.text.length < 10 &&
                       phoneNumberController.text.length > 0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: CustomSnackBarContent(
-                        errorMessage:'You entered a missing number, correct it immediately.'),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ),
-                    );
+                    phoneNumberFocus.requestFocus();
                   }else if (emailController.text.length==0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: CustomSnackBarContent(
-                        errorMessage:"You diidn't enter your email"),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ),
-                    );
+                    emailFocus.requestFocus();
                   }else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                       .hasMatch(emailController.text)) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: CustomSnackBarContent(
-                        errorMessage:"You entered the email wrongly"),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ),
-                    );
+                    emailFocus.requestFocus();
                   }else if (passwordController.text.length==0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: CustomSnackBarContent(
-                        errorMessage:"You diidn't enter your password"),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                      ),
-                    );
+                    passwordFocus.requestFocus();
                   } else {
                     signup();
 
@@ -165,15 +116,51 @@ class _registerFormState extends State<registerForm> {
     );
   }
   void signup(){
-    Map user ={
-      'name': nameController.text,
-      'surname': surnameController.text,
-      'email': emailController.text,
-      'phone_number': phoneNumberController.text,
-      'password': passwordController.text
-    };
-    dbRef.push().set(user);
-    auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+    try{
+      Map user ={
+        'name': nameController.text,
+        'surname': surnameController.text,
+        'email': emailController.text,
+        'phone_number': phoneNumberController.text,
+        'password': passwordController.text
+      };
+      dbRef.push().set(user);
+      auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+    }on FirebaseAuthException catch (e){
+      if(e.code=='email-already-in-use'){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackBarContent(
+              errorMessage:
+                  "Email is being used."),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ));
+      }
+      if(e.code=='invalid-email'){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackBarContent(
+              errorMessage:
+                  "Invalid email."),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ));
+      }
+      if(e.code=='weak-password'){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackBarContent(
+              errorMessage:
+                  "Put a stronger password."),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ));
+      }
+    }catch (e){
+      print(e.toString());
+    }
+    
   }
 
   void _reqFocus(){
@@ -232,6 +219,13 @@ class _registerFormState extends State<registerForm> {
       keyboardType: TextInputType.text,
       controller: surnameController,
       showCursor: true,
+      validator: (value) {
+        if(value!.isEmpty){
+          return 'Please enter surname';
+        }else{
+          return null;
+        }
+      },
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),
@@ -262,6 +256,16 @@ class _registerFormState extends State<registerForm> {
       keyboardType: TextInputType.text,
       controller: emailController,
       showCursor: true,
+      validator: (value) {
+        if(value!.isEmpty){
+          return 'Please enter email';
+        }else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(value)){
+          return 'incorrect email';
+        }else{
+          return null;
+        }
+      },
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),
@@ -292,9 +296,20 @@ class _registerFormState extends State<registerForm> {
       keyboardType: TextInputType.number,
       controller: phoneNumberController,
       showCursor: true,
+      maxLength: 10,
+      validator: (value) {
+        if(value!.isEmpty){
+          return 'Please enter phone number';
+        }else if(phoneNumberController.text.length < 10 && phoneNumberController.text.length > 0){
+          return 'incomplete phone number';
+        }else{
+          return null;
+        }
+      },
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),
+          child: Text('+90'),
         ),
         labelText: "Phone Number",
         floatingLabelStyle: TextStyle(color: Colors.purple),
@@ -322,6 +337,13 @@ class _registerFormState extends State<registerForm> {
       keyboardType: TextInputType.text,
       controller: passwordController,
       showCursor: true,
+      validator: (value) {
+        if(value!.isEmpty){
+          return 'Please enter password';
+        }else{
+          return null;
+        }
+      },
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),

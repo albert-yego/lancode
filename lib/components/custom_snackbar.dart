@@ -67,17 +67,18 @@ class CustomSnackBarContent extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: -(getHeight / 40),
-            left: 0,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SvgPicture.asset(
-                  "assets/icons/fail.svg",
-                  height: getHeight / 20,
-                ),
-              ],
-            )),
+          top: -(getHeight / 40),
+          left: 0,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SvgPicture.asset(
+                "assets/icons/fail.svg",
+                height: getHeight / 20,
+              ),
+            ],
+          )
+        ),
       ],
     );
   }

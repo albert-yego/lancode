@@ -60,7 +60,7 @@ class _loginPageState extends State<loginPage> {
               SizedBox(height: getHeight/35),
 
               Text(
-                'LANQUIZ',
+                'LANCODE',
                 style: GoogleFonts.bebasNeue(
                   color: Colors.grey[700],
                   fontSize: 50,
