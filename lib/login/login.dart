@@ -52,18 +52,23 @@ class _loginPageState extends State<loginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/images/logo.png",
-                height: 100,
+              Text(
+                'WELCOME TO',
+                style: GoogleFonts.bebasNeue(
+                  color: Colors.grey[700],
+                  fontSize: 50,
+                ),
               ),
+              
 
               SizedBox(height: getHeight/35),
 
               Text(
                 'LANCODE',
                 style: GoogleFonts.bebasNeue(
-                  color: Colors.grey[700],
-                  fontSize: 50,
+                  color: Colors.purple[700],
+                  fontSize: 40,
+
                 ),
               ),
 

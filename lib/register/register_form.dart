@@ -57,11 +57,11 @@ class _registerFormState extends State<registerForm> {
             children: [
               SizedBox(height: getHeight / 40),
               nameField(),
-              SizedBox(height: getHeight / 40),
+              SizedBox(height: getHeight / 20),
               surnameField(),
-              SizedBox(height: getHeight / 40),
+              SizedBox(height: getHeight / 20),
               emailField(),
-              SizedBox(height: getHeight / 40),
+              SizedBox(height: getHeight / 20),
               phoneNumberField(),
               SizedBox(height: getHeight / 40),
               passwordField(),
@@ -188,7 +188,7 @@ class _registerFormState extends State<registerForm> {
           padding: EdgeInsets.all(4),
         ),
         labelText: "Name",
-        floatingLabelStyle: TextStyle(color: nameFocus.hasPrimaryFocus ?Colors.purple:Colors.red),
+        floatingLabelStyle: TextStyle(color: Colors.purple),
         labelStyle: TextStyle(color: Colors.grey[500]),
         hintText: "Enter your name",
         enabledBorder: const OutlineInputBorder(
@@ -197,6 +197,7 @@ class _registerFormState extends State<registerForm> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
+        errorText: nameController.text.length == 0 ? 'Name is required' : null,
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red)
         ),
@@ -226,6 +227,8 @@ class _registerFormState extends State<registerForm> {
           return null;
         }
       },
+      focusNode: surnameFocus,
+      autofocus: false,
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),
@@ -239,6 +242,12 @@ class _registerFormState extends State<registerForm> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
         ),
         fillColor: Colors.grey.shade200,
         filled: true,
@@ -266,6 +275,8 @@ class _registerFormState extends State<registerForm> {
           return null;
         }
       },
+      focusNode: emailFocus,
+      autofocus: false,
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),
@@ -279,6 +290,12 @@ class _registerFormState extends State<registerForm> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
         ),
         fillColor: Colors.grey.shade200,
         filled: true,
@@ -306,6 +323,8 @@ class _registerFormState extends State<registerForm> {
           return null;
         }
       },
+      focusNode: phoneNumberFocus,
+      autofocus: false,
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),
@@ -320,6 +339,12 @@ class _registerFormState extends State<registerForm> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
         ),
         fillColor: Colors.grey.shade200,
         filled: true,
@@ -344,6 +369,8 @@ class _registerFormState extends State<registerForm> {
           return null;
         }
       },
+      focusNode: passwordFocus,
+      autofocus: false,
       decoration: InputDecoration(
         prefix: Padding(
           padding: EdgeInsets.all(4),
@@ -357,6 +384,12 @@ class _registerFormState extends State<registerForm> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red)
         ),
         fillColor: Colors.grey.shade200,
         filled: true,

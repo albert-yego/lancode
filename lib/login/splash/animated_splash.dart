@@ -11,8 +11,8 @@ class SplashScreenLAnimated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: Lottie.asset("assets/json files/lanquiz.json"),
-      splashIconSize: getHeight / 4,
+      splash: Lottie.asset("assets/json files/lancode.json"),
+      splashIconSize: 450,
       backgroundColor: Colors.white,
       nextScreen: loginPage(),
       pageTransitionType: PageTransitionType.bottomToTop,

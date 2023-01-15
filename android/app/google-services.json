@@ -1,23 +1,24 @@
 {
   "project_info": {
     "project_number": "1081606663872",
+    "firebase_url": "https://mobileprogramming-c9890-default-rtdb.firebaseio.com",
     "project_id": "mobileprogramming-c9890",
     "storage_bucket": "mobileprogramming-c9890.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1081606663872:android:fdf03e5c002696bdf8c725",
+        "mobilesdk_app_id": "1:1081606663872:android:bf5db15be01e1172f8c725",
         "android_client_info": {
-          "package_name": "com.example.lanquiz"
+          "package_name": "com.example.lancode"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1081606663872-5a864auk3dpaihfhl1jpe9n2994h71lj.apps.googleusercontent.com",
+          "client_id": "1081606663872-plq2l0tgulsnkjson2u1t4sm7n876fk3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.lanquiz",
+            "package_name": "com.example.lancode",
             "certificate_hash": "5a5c5f9bad9433ffd83302b8b13b0850a54018c9"
           }
         },
