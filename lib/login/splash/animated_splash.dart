@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lanquiz/login/login.dart';
-import 'package:lanquiz/util/constants.dart';
+import 'package:lancode/login/login.dart';
+import 'package:lancode/util/constants.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';

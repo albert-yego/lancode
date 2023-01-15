@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/main.dart';
-import 'package:untitled2/question_page.dart';
-import 'package:untitled2/start.dart';
+import 'package:lancode/main.dart';
+import 'package:lancode/question_page.dart';
+import 'package:lancode/start.dart';
 
 
 import 'Questions.dart';

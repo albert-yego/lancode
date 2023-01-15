@@ -1,8 +1,8 @@
-import 'package:lanquiz/components/default_button.dart';
-import 'package:lanquiz/components/default_textfield.dart';
-import 'package:lanquiz/register/register.dart';
-import 'package:lanquiz/util/constants.dart';
-import 'package:lanquiz/home/splash/animated_splash.dart';
+import 'package:lancode/components/default_button.dart';
+import 'package:lancode/components/default_textfield.dart';
+import 'package:lancode/register/register.dart';
+import 'package:lancode/util/constants.dart';
+import 'package:lancode/home/splash/animated_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fluttertoast/fluttertoast.dart';

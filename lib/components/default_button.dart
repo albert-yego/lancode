@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lanquiz/util/constants.dart';
+import 'package:lancode/util/constants.dart';
 
 class defaultButton extends StatelessWidget {
 

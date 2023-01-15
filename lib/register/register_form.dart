@@ -3,11 +3,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:lanquiz/util/constants.dart';
-import 'package:lanquiz/login/login.dart';
-import 'package:lanquiz/components/default_textfield.dart';
-import 'package:lanquiz/components/default_button.dart';
-import 'package:lanquiz/components/custom_snackbar.dart';
+import 'package:lancode/util/constants.dart';
+import 'package:lancode/login/login.dart';
+import 'package:lancode/components/default_textfield.dart';
+import 'package:lancode/components/default_button.dart';
+import 'package:lancode/components/custom_snackbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class registerForm extends StatefulWidget {

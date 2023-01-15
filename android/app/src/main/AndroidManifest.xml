@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lanquiz">
+    package="com.example.lancode">
    <application
-        android:label="lanquiz"
+        android:label="lancode"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

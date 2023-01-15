@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/result.dart';
-import 'package:untitled2/start.dart';
+import 'package:lancode/result.dart';
+import 'package:lancode/start.dart';
 
 import 'Questions.dart';
 

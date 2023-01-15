@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lanquiz/login/login.dart';
-import 'package:lanquiz/util/constants.dart';
-import 'package:lanquiz/register/register_form.dart';
+import 'package:lancode/login/login.dart';
+import 'package:lancode/util/constants.dart';
+import 'package:lancode/register/register_form.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class registerPage extends StatefulWidget {

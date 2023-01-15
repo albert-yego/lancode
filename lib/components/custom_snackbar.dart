@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lanquiz/util/constants.dart';
+import 'package:lancode/util/constants.dart';
 
 class CustomSnackBarContent extends StatelessWidget {
   const CustomSnackBarContent({

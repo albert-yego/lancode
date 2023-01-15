@@ -1,4 +1,4 @@
-# lanquiz
+# lancode
 
 A new Flutter project.
 
