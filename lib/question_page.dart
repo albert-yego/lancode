@@ -116,37 +116,37 @@ class _Question_PageState extends State<Question_Page> {
               child: Center(
                 child: Text(
                   MyTest.writeQuestion_text(),
-                  style: (TextStyle(fontSize: 30)),
+                  style: (TextStyle(fontSize: 25)),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left:15,right: 10),
+              padding: const EdgeInsets.only(left:15,right: 10 ,bottom: 25),
               child: Container(
 
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment:CrossAxisAlignment.start,
-                  children: [
-                    Text(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment:CrossAxisAlignment.start,
+                    children: [
+                      Text(
                       "a) ${MyTest.asikki()}",
-                      style: (TextStyle(fontSize: 25)),
-                    ),
-                    Text(
-                      "b) ${MyTest.bsikki()}",
-                      style: (TextStyle(fontSize: 25)),
-                    ),
-                    Text(
-                      "c) ${MyTest.csikki()}",
-                      style: (TextStyle(fontSize: 25)),
-                    ),
-                    Text(
-                      "d) ${MyTest.dsikki()}",
-                      style: (TextStyle(fontSize: 25)),
-                    ),
-                  ],
+                        style: (TextStyle(fontSize: 20)),
+                      ),
+                      Text(
+                        "b) ${MyTest.bsikki()}",
+                        style: (TextStyle(fontSize: 20)),
+                      ),
+                      Text(
+                        "c) ${MyTest.csikki()}",
+                        style: (TextStyle(fontSize: 20)),
+                      ),
+                      Text(
+                        "d) ${MyTest.dsikki()}",
+                        style: (TextStyle(fontSize: 20)),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
             ),
 
             Expanded(
@@ -189,7 +189,8 @@ class _Question_PageState extends State<Question_Page> {
                                 "a",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.black
+                                    color: Colors.black,
+                                    fontSize: 20
                                 ),
                               ),
                             ),
@@ -232,7 +233,8 @@ class _Question_PageState extends State<Question_Page> {
                                 "b",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.black
+                                    color: Colors.black,
+                                    fontSize: 20
                                 ),
                               ),
                             ),
@@ -281,10 +283,11 @@ class _Question_PageState extends State<Question_Page> {
                               constraints: BoxConstraints(minWidth: 300.0, minHeight: 50.0),
                               alignment: Alignment.center,
                               child: Text(
-                                "c",
+                              "c",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.black
+                                    color: Colors.black,
+                                    fontSize: 20
                                 ),
                               ),
                             ),
@@ -313,11 +316,11 @@ class _Question_PageState extends State<Question_Page> {
 
                           child: Ink(
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [Color(0xFF9C27B0), Color(0XFFF42A5F5)],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
+                                gradient: LinearGradient(colors: [Color(0xFF9C27B0), Color(0XFFF42A5F5)],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
 
                             ),
                             child: Container(
@@ -327,7 +330,8 @@ class _Question_PageState extends State<Question_Page> {
                                 "d",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.black
+                                    color: Colors.black,
+                                    fontSize: 20
                                 ),
                               ),
                             ),
@@ -343,8 +347,11 @@ class _Question_PageState extends State<Question_Page> {
               "result",
               style: TextStyle(fontSize: 20.0),
             ),
-            Row(
-              children: MyTest.resultIcone,
+            Padding(
+              padding: const EdgeInsets.only(left: 25),
+              child: Row(
+                children: MyTest.resultIcone,
+              ),
             ),
             const SizedBox(
               height: 20.0,

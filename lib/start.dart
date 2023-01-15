@@ -54,7 +54,7 @@ class _StartState extends State<Start> {
                         child: Container(
                             height: 50,
                             child: Image.asset(
-                                "assets/img/pet-health-icon-black.png")),
+                                "assets/img/2055753.png")),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 18),
@@ -90,7 +90,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/pet-health-icon-black.png")),
+                              "assets/img/1857147.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),
@@ -127,7 +127,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/pet-health-icon-black.png")),
+                              "assets/img/562626.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),
@@ -165,7 +165,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/pet-health-icon-black.png")),
+                              "assets/img/13845.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),
@@ -202,7 +202,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/pet-health-icon-black.png")),
+                              "assets/img/software-icon-13.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),

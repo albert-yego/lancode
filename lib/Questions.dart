@@ -8,7 +8,8 @@ Test MyTest = new Test();
 
 class Test {
   //nitelikler ve özellikler
-
+  int seconds = 2;
+  int minutes=1;
   int showQuestion = 0;
   var count = 0;
   var t_rue = 0;
@@ -16,7 +17,7 @@ class Test {
   var levelpassed = 1;
   List<Icon> resultIcone = [];
   List<Question> Questions = [
-    Question(question_text: "2+2", a: "3", b: "4", c: "5", d: "6", answer: "b"),
+    Question(question_text: "this is new question", a: "Javakjdahvdvnalkdnvlakdnvladnvlakdnvlkandlvkandvlknadlvn", b: "4advadsvadvsvasdvasd", c: "vadvadvadva", d: "advadvadvadvadvasdvad", answer: "b"),
     Question(
         question_text: "asc",
         a: "asc",
@@ -36,7 +37,7 @@ class Test {
         answer: "c"),
   ];
   List<Question> Questions1 = [
-    Question(question_text: "2x5", a: "10", b: "14", c: "50", d: "6", answer: "a"),
+    Question(question_text: "this is new question", a: "10", b: "14", c: "50", d: "6", answer: "a"),
     Question(question_text: "8x6", a: "36", b: "48", c: "52", d: "64", answer: "b"),
     Question(question_text: "96/8 ", a: "13", b: "14", c: "12", d: "6", answer: "c"),
     Question(question_text: "2. level soruları", a: "3", b: "4", c: "5", d: "6", answer: "b"),
@@ -134,14 +135,16 @@ class Test {
     if (levelQuestion()[showQuestion].Answer == k_cevabi) {
       print("true");
       resultIcone.add(
-        Icon(Icons.check),
+        Icon(Icons.check_circle,
+        color: Colors.purple,),
       );
       t_rue++;
       print(t_rue);
     } else {
       print("wrong");
       resultIcone.add(
-        Icon(Icons.close),
+        Icon(Icons.cancel,
+           color: Colors.red),
       );
     }
     if (count != 12) {

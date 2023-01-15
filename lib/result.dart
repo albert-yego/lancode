@@ -6,6 +6,7 @@ import 'package:untitled2/main.dart';
 import 'package:untitled2/question_page.dart';
 import 'package:untitled2/start.dart';
 
+
 import 'Questions.dart';
 
 class Result extends StatefulWidget {
@@ -23,11 +24,16 @@ class _ResultState extends State<Result> {
         appBar: null,
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 150),
-              child: const Expanded(
-                child: Text("değerlendirme metmi"),
+            const Padding(
+              padding: EdgeInsets.only(top: 150),
+              child: Expanded(
+
+                child: Text("Lesson Evaluation",
+
+
+                  textAlign:TextAlign.center,
               ),
+            ),
             ),
             Expanded(
               child: Center(
@@ -106,6 +112,7 @@ class _ResultState extends State<Result> {
                                 MyTest.count = 0;
                                 MyTest.t_rue = 0;
                                 MyTest.resultIcone = [];
+
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
