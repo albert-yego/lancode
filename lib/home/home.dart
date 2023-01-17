@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lancode/Profile/profile_page.dart';
+import 'package:lancode/components/default_button.dart';
 import 'package:lancode/home/splash/splash.dart';
 
 import '../util/constants.dart';
@@ -40,7 +41,36 @@ class _homePageState extends State<homePage> {
         ),
         elevation: 0,
       ),
-      body: Center(),
+      body: Padding(
+        padding: EdgeInsets.only(
+            top: getHeight / 6.5, right: getWidth / 80, left: getWidth / 80),
+        child: Column(
+          children: [
+            FutureBuilder(
+              future: customerAccountDetails(
+                  FirebaseAuth.instance.currentUser!.email),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return buildWelcomeBar(context, snapshot);
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }
+            ),
+            SizedBox(height: getHeight / 10),
+            defaultButton(
+              text: 'Lessons', 
+              onPress: (){
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => ,
+                //   ),
+                // );
+              }
+            ),
+        ]),
+      ),
       drawer: Drawer(
         child: Container(
             color: Colors.purple[200],
@@ -110,7 +140,68 @@ class _homePageState extends State<homePage> {
                   ),
                 ),
               ],
-            )),
+            )
+          ),
+      ),
+    );
+  }
+
+  Widget buildWelcomeBar(context, snapshot) {
+    Map CurrUser = snapshot.data as Map;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: getWidth / 40),
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome, ${CurrUser['name']}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(height: getHeight / 150),
+                  Text(
+                    "Let's see what new lessons are in store for us",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  )
+                ],
+              ),
+              Spacer(),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 3, color: Colors.purple),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => profilePage(),
+                      ),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.network(
+                      CurrUser['photoURL'],
+                      height: getHeight / 18,
+                      width: getWidth / 9,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ]
       ),
     );
   }
