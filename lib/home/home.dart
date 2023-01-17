@@ -59,17 +59,7 @@ class _homePageState extends State<homePage> {
               }
             ),
             SizedBox(height: getHeight / 10),
-            defaultButton(
-              text: 'Python', 
-              onPress: (){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Start(),
-                  ),
-                );
-              }
-            ),
+            buildLanguageList()
         ]),
       ),
       drawer: Drawer(
@@ -143,6 +133,52 @@ class _homePageState extends State<homePage> {
               ],
             )
           ),
+      ),
+    );
+  }
+    
+  Widget buildLanguageList() {
+    List<String> languages = ['Python','Java','HTML','C++','CSS'];
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: getWidth / 30),
+      child: ListView.builder(
+        padding: EdgeInsets.only(top: 0),
+        itemCount: languages.length,
+        itemBuilder: (BuildContext context, int index) {
+          String event = languages[index];
+          return Container(
+            margin: EdgeInsets.only(bottom: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.purple,
+              border: Border.all(
+                width: 1.5,
+                color: Colors.purple,
+              ),
+            ),
+            child: ListTile(
+              contentPadding: EdgeInsets.only(top: 2, left: 5),
+              title: Text(
+                event,
+                style: GoogleFonts.bebasNeue(
+                  color: Colors.white,
+                  fontSize: 20,
+                )
+              ),
+              onTap: () async {
+                if(event=='Python'){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>Start()
+                    ));
+                }
+              },
+            ),
+          );
+        },
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
       ),
     );
   }
