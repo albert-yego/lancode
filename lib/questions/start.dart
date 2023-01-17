@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lancode/home/home.dart';
 import 'package:lancode/questions/question_page.dart';
 
 import 'Questions.dart';
@@ -19,7 +20,10 @@ class _StartState extends State<Start> {
       backgroundColor: Colors.grey[300],
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => homePage()),
+              );},
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: Colors.black,
