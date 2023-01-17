@@ -16,9 +16,8 @@ class Customer {
   final String surname;
   final String photoURL;
   final String auth_uid;
-  final String password;
 
-  Customer(this.uid, this.name, this.phone, this.email, this.surname,this.photoURL, this.auth_uid,this.password);
+  Customer(this.uid, this.name, this.phone, this.email, this.surname,this.photoURL, this.auth_uid);
 }
 Future<List<Customer>> customerListMaker() async {
   List<Customer> customerList = [];
@@ -35,8 +34,7 @@ Future<List<Customer>> customerListMaker() async {
             value['email'],
             value['surname'],
             value['photoURL'],
-            value['auth_uid'],
-            value['password'],));
+            value['auth_uid']));
       });
       return customerList;
     } else {
@@ -66,7 +64,6 @@ Future<Map<dynamic, dynamic>> customerAccountDetails(String? email) async {
           'photoURL': element.photoURL,
           'uid': element.uid,
           'auth_uid': element.auth_uid,
-          'password': element.password
         };
         break;
       } else {

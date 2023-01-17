@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lancode/home/home.dart';
 import 'package:lancode/components/default_button.dart';
 import 'package:lancode/profile/profile_edit.dart';
@@ -18,7 +19,8 @@ class _profilePageState extends State<profilePage> {
   String? authcurrent =
       FirebaseAuth.instance.currentUser?.email;
   String photo1 = FirebaseAuth.instance.currentUser!.photoURL.toString();
-  String photo2 = '';
+  String photo2 = 'https://firebasestorage.googleapis.com/v0/b/mobileprogramming-c9890.appspot.com/o/files%2Ficon.jpg?alt=media&token=c84cb5f8-1e38-4a0b-b83f-f3d6cd2d2cf0';
+
 
   void initState() {
     super.initState();
@@ -28,8 +30,15 @@ class _profilePageState extends State<profilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text(
+          'PROFILE',
+          style: GoogleFonts.bebasNeue(
+            color: Colors.purple[700],
+            fontSize: 20,
+          ),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pushReplacement(
@@ -43,7 +52,9 @@ class _profilePageState extends State<profilePage> {
             Icons.arrow_back_ios,
             color: Colors.black,
           )
-        )
+        ),
+        backgroundColor: Colors.grey[300],
+        elevation: 0,
       ),
       body: FutureBuilder(
         future: customerAccountDetails(authcurrent!),

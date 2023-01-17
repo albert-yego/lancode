@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:lancode/components/default_button.dart';
 import 'package:lancode/components/default_textfield.dart';
+import 'package:lancode/login/new_password.dart';
 import 'package:lancode/register/register.dart';
 import 'package:lancode/util/constants.dart';
 import 'package:lancode/home/splash/animated_splash.dart';
@@ -27,6 +28,7 @@ class _loginPageState extends State<loginPage> {
   bool passwordVisibility = false;
   bool emailVisibility= true;
   String hinttext = 'Colors.purple';
+  Map userK = {};
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +96,11 @@ class _loginPageState extends State<loginPage> {
               SizedBox(height: getHeight/25),
 
               defaultButton(
-                onPress: () {
+                onPress: () async{
                   if(emailVisibility){
                     passwordVisibility=true;
                     emailVisibility=false;
+                    userK = await customerAccountDetails(emailController.text);
                     setState(() {});
                   }else{
                     signUserIn();
@@ -149,13 +152,28 @@ class _loginPageState extends State<loginPage> {
                     ),
                     SizedBox(height: getHeight/50),
                     GestureDetector(
-                      onTap: () {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        Navigator.push(
+                      onTap: () async{
+                        List<Customer> items = await customerListMaker();
+                        List<String> emails = [];
+                        for(var element in items){
+                          emails.add(element.email);
+                        }
+                        if(emails.contains(emailController.text)){
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => registerPage(),
+                              builder: (context) => emailChangePage(userEmail: emailController.text, userK: userK['uid']),
                             ));
+                        }else{
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: CustomSnackBarContent(
+                                errorMessage:
+                                    "User doesn't exist.Please register first"),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ));
+                        }
                       },
                       child: Text(
                         'Reset password here',
@@ -185,7 +203,7 @@ class _loginPageState extends State<loginPage> {
         )
       ).then((value) => null);
       Fluttertoast.showToast(
-        msg: "You are registered successfully",
+        msg: "You have logged in successfully",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
@@ -198,7 +216,7 @@ class _loginPageState extends State<loginPage> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: CustomSnackBarContent(
               errorMessage:
-                  "User doesn't exist."),
+                  "User doesn't exist.Please register first"),
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -225,6 +243,7 @@ class _loginPageState extends State<loginPage> {
         ));
       }
     }catch (e){
+      print(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: CustomSnackBarContent(
               errorMessage:
@@ -295,7 +314,7 @@ class _loginPageState extends State<loginPage> {
           filled: true,
           hintStyle: TextStyle(color: Colors.grey[500]),
           suffixIcon: Icon(
-            Icons.account_circle,
+            Icons.key,
             color: Colors.purple,
           ),
         ),

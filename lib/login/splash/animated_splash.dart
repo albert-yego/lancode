@@ -15,7 +15,7 @@ class SplashScreenLAnimated extends StatelessWidget {
       splash: Lottie.asset("assets/json files/lancode.json"),
       splashIconSize: 450,
       backgroundColor: Colors.white,
-      nextScreen: homePage(),
+      nextScreen: loginPage(),
       pageTransitionType: PageTransitionType.bottomToTop,
     );
   }

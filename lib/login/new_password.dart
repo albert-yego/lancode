@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lancode/login/login.dart';
 import 'package:lancode/util/constants.dart';
 import 'package:lancode/components/default_button.dart';
 import 'package:lancode/components/custom_snackbar.dart';
@@ -35,9 +37,24 @@ class _emailChangePageState extends State<emailChangePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text("New Password"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => loginPage(),
+              )
+            );
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          )
+        ),
+        backgroundColor: Colors.grey[300],
+        elevation: 0,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: getWidth / 20, vertical: getHeight / 40),
@@ -46,6 +63,27 @@ class _emailChangePageState extends State<emailChangePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: getHeight / 100,
+              ),
+              Icon(
+                Icons.lock,
+                size: 50,
+                color: Colors.purple,
+              ),
+              SizedBox(
+                height: getHeight / 1500,
+              ),
+              Text(
+                'New Password',
+                style: GoogleFonts.bebasNeue(
+                  color: Colors.grey[700],
+                  fontSize: 25,
+                ),
+              ),
+              SizedBox(
+                height: getHeight / 50,
+              ),
               buildNewPasswordFormField(),
               SizedBox(height: getHeight / 40),
               defaultButton(
@@ -57,6 +95,11 @@ class _emailChangePageState extends State<emailChangePage> {
                     try{
                       await auth.sendPasswordResetEmail(email: widget.userEmail);
                       dbref.update({'password': newPasswordController.text});
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => loginPage(),
+                        ));
                     }on FirebaseAuthException catch(e){
                       if(e.code=='auth/invalid-email'){
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -139,7 +182,7 @@ class _emailChangePageState extends State<emailChangePage> {
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[500]),
         icon: Icon(
-          Icons.account_circle,
+          Icons.lock,
           color: Colors.purple,
         ),
       ),

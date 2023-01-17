@@ -66,47 +66,30 @@ class _registerFormState extends State<registerForm> {
               passwordField(),
               SizedBox(height: getHeight / 20),
               defaultButton(
-                text: 'Register',
-                onPress: () async {
-                   _validationKey.currentState?.validate();
-                  if (nameController.text.length == 0) {
-                    nameFocus.requestFocus();
-                  } else if (surnameController.text.length == 0) {
-                    surnameFocus.requestFocus();
-                  }else if (emailController.text.length==0) {
-                    emailFocus.requestFocus();
-                  }else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(emailController.text)) {
-                    emailFocus.requestFocus();
-                  } else if (phoneNumberController.text.length == 0) {
-                    phoneNumberFocus.requestFocus();
-                  } else if (phoneNumberController.text.length < 10 &&
-                      phoneNumberController.text.length > 0) {
-                    phoneNumberFocus.requestFocus();
-                  }else if (passwordController.text.length==0) {
-                    passwordFocus.requestFocus();
-                  } else {
-                    signup();
-
-                    Fluttertoast.showToast(
-                      msg: "You are registered successfully",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.purple,
-                      textColor: Colors.white,
-                      fontSize: 16,
-                    ).then((value) =>{
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => loginPage(),
-                        ),
-                      )
-                    });
-                  }
-                }
-              ),
+                  text: 'Register',
+                  onPress: () async {
+                    _validationKey.currentState?.validate();
+                    if (nameController.text.length == 0) {
+                      nameFocus.requestFocus();
+                    } else if (surnameController.text.length == 0) {
+                      surnameFocus.requestFocus();
+                    } else if (emailController.text.length == 0) {
+                      emailFocus.requestFocus();
+                    } else if (!RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(emailController.text)) {
+                      emailFocus.requestFocus();
+                    } else if (phoneNumberController.text.length == 0) {
+                      phoneNumberFocus.requestFocus();
+                    } else if (phoneNumberController.text.length < 10 &&
+                        phoneNumberController.text.length > 0) {
+                      phoneNumberFocus.requestFocus();
+                    } else if (passwordController.text.length == 0) {
+                      passwordFocus.requestFocus();
+                    } else {
+                      signup();
+                    }
+                  }),
               SizedBox(height: getHeight / 50),
             ],
           ),
@@ -114,54 +97,67 @@ class _registerFormState extends State<registerForm> {
       ),
     );
   }
-  void signup() async{
-    try{
-      await auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-      Map user ={
+
+  void signup() async {
+    try {
+      await auth.createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      Map user = {
         'name': nameController.text,
         'surname': surnameController.text,
-        'photoURL': 'https://firebasestorage.googleapis.com/v0/b/mobileprogramming-c9890.appspot.com/o/files%2Ficon.jpg?alt=media&token=c84cb5f8-1e38-4a0b-b83f-f3d6cd2d2cf0',
+        'photoURL':
+            'https://firebasestorage.googleapis.com/v0/b/mobileprogramming-c9890.appspot.com/o/files%2Ficon.jpg?alt=media&token=c84cb5f8-1e38-4a0b-b83f-f3d6cd2d2cf0',
         'email': emailController.text,
         'auth_uid': '',
         'phone_number': phoneNumberController.text,
         'password': passwordController.text
       };
       dbRef.push().set(user);
-    }on FirebaseAuthException catch (e){
-      if(e.code=='email-already-in-use'){
+      Fluttertoast.showToast(
+        msg: "You are registered successfully",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.purple,
+        textColor: Colors.white,
+        fontSize: 16,
+      ).then((value) => {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => loginPage(),
+              ),
+            )
+          });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: CustomSnackBarContent(
-              errorMessage:
-                  "Email is being used."),
+          content: CustomSnackBarContent(errorMessage: "Email is being used."),
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
         ));
       }
-      if(e.code=='invalid-email'){
+      if (e.code == 'invalid-email') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: CustomSnackBarContent(
-              errorMessage:
-                  "Invalid email."),
+          content: CustomSnackBarContent(errorMessage: "Invalid email."),
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
         ));
       }
-      if(e.code=='weak-password'){
+      if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: CustomSnackBarContent(
-              errorMessage:
-                  "Put a stronger password."),
+          content:
+              CustomSnackBarContent(errorMessage: "Put a stronger password."),
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           elevation: 0,
         ));
       }
-    }catch (e){
+    } catch (e) {
       print(e.toString());
     }
-    
   }
 
   // void _reqFocus(){
@@ -169,7 +165,7 @@ class _registerFormState extends State<registerForm> {
   //     FocusScope.of(context).requestFocus(nameFocus);
   //   });
   // }
-  
+
   TextFormField nameField() {
     return TextFormField(
       keyboardType: TextInputType.text,
@@ -178,9 +174,9 @@ class _registerFormState extends State<registerForm> {
       showCursor: true,
       cursorColor: Colors.purple,
       validator: (value) {
-        if(value!.isEmpty){
+        if (value!.isEmpty) {
           return 'Please enter name';
-        }else{
+        } else {
           return null;
         }
       },
@@ -200,12 +196,10 @@ class _registerFormState extends State<registerForm> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
+        errorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         fillColor: Colors.grey.shade200,
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[500]),
@@ -225,9 +219,9 @@ class _registerFormState extends State<registerForm> {
       showCursor: true,
       cursorColor: Colors.purple,
       validator: (value) {
-        if(value!.isEmpty){
+        if (value!.isEmpty) {
           return 'Please enter surname';
-        }else{
+        } else {
           return null;
         }
       },
@@ -247,12 +241,10 @@ class _registerFormState extends State<registerForm> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
+        errorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         fillColor: Colors.grey.shade200,
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[500]),
@@ -264,19 +256,20 @@ class _registerFormState extends State<registerForm> {
     );
   }
 
-  TextFormField emailField(){
+  TextFormField emailField() {
     return TextFormField(
       keyboardType: TextInputType.text,
       controller: emailController,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       showCursor: true,
       validator: (value) {
-        if(value!.isEmpty){
+        if (value!.isEmpty) {
           return 'Please enter email';
-        }else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(value)){
+        } else if (!RegExp(
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(value)) {
           return 'incorrect email';
-        }else{
+        } else {
           return null;
         }
       },
@@ -296,12 +289,10 @@ class _registerFormState extends State<registerForm> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
+        errorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         fillColor: Colors.grey.shade200,
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[500]),
@@ -313,7 +304,7 @@ class _registerFormState extends State<registerForm> {
     );
   }
 
-  TextFormField phoneNumberField(){
+  TextFormField phoneNumberField() {
     return TextFormField(
       keyboardType: TextInputType.number,
       controller: phoneNumberController,
@@ -322,11 +313,12 @@ class _registerFormState extends State<registerForm> {
       cursorColor: Colors.purple,
       maxLength: 10,
       validator: (value) {
-        if(value!.isEmpty){
+        if (value!.isEmpty) {
           return 'Please enter phone number';
-        }else if(phoneNumberController.text.length < 10 && phoneNumberController.text.length > 0){
+        } else if (phoneNumberController.text.length < 10 &&
+            phoneNumberController.text.length > 0) {
           return 'incomplete phone number';
-        }else{
+        } else {
           return null;
         }
       },
@@ -347,12 +339,10 @@ class _registerFormState extends State<registerForm> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
+        errorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         fillColor: Colors.grey.shade200,
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[500]),
@@ -364,7 +354,7 @@ class _registerFormState extends State<registerForm> {
     );
   }
 
-  TextFormField passwordField(){
+  TextFormField passwordField() {
     return TextFormField(
       keyboardType: TextInputType.text,
       controller: passwordController,
@@ -372,9 +362,9 @@ class _registerFormState extends State<registerForm> {
       showCursor: true,
       cursorColor: Colors.purple,
       validator: (value) {
-        if(value!.isEmpty){
+        if (value!.isEmpty) {
           return 'Please enter password';
-        }else{
+        } else {
           return null;
         }
       },
@@ -394,21 +384,18 @@ class _registerFormState extends State<registerForm> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)
-        ),
+        errorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         fillColor: Colors.grey.shade200,
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[500]),
         icon: Icon(
-          Icons.account_circle,
+          Icons.lock,
           color: Colors.purple,
         ),
       ),
     );
   }
-
 }

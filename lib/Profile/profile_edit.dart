@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lancode/components/default_button.dart';
 import 'package:lancode/util/constants.dart';
 import 'package:lancode/components/custom_snackbar.dart';
@@ -25,8 +26,26 @@ class _UpdateState extends State<Update> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text('Edit Profile'),
+         title: Text(
+          'EDIT PROFILE',
+          style: GoogleFonts.bebasNeue(
+            color: Colors.purple[700],
+            fontSize: 20,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          )
+        ),
+        backgroundColor: Colors.grey[300],
+        elevation: 0,
       ),
       body: SafeArea(
         child: SizedBox(
@@ -74,7 +93,7 @@ class _EditProfileState extends State<EditProfile> {
   late DatabaseReference dbRef;
 
   String photo1 = FirebaseAuth.instance.currentUser!.photoURL.toString();
-  String photo2 = '';
+  String photo2 = 'https://firebasestorage.googleapis.com/v0/b/mobileprogramming-c9890.appspot.com/o/files%2Ficon.jpg?alt=media&token=c84cb5f8-1e38-4a0b-b83f-f3d6cd2d2cf0';
 
   void initState() {
     setState(() {});
@@ -100,116 +119,118 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Expanded(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buildProfilePicField(),
-              SizedBox(height: getHeight / 40),
-              buildNameFormField(),
-              SizedBox(height: getHeight / 40),
-              buildSurnameFormField(),
-              SizedBox(height: getHeight / 40),
-              buildEmailFormField(),
-              SizedBox(height: getHeight / 40),
-              buildPhoneNumberFormField(),
-              SizedBox(height: getHeight / 20),
-              defaultButton(
-                onPress: () async {
-                   _validationKey.currentState?.validate();
-                  if (name.text.length == 0) {
-                    nameFocus.requestFocus();
-                  } else if (surname.text.length == 0) {
-                    surnameFocus.requestFocus();
-                  }else if (email.text.length==0) {
-                    emailFocus.requestFocus();
-                  }else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(email.text)) {
-                    emailFocus.requestFocus();
-                  } else if (phoneN.text.length == 0) {
-                    phoneNumberFocus.requestFocus();
-                  } else if (phoneN.text.length < 10 &&
-                      phoneN.text.length > 0) {
-                    phoneNumberFocus.requestFocus();
-                  }  else {
-                    List<String> emails = [];
-                    List<String> phones = [];
-                    List<Customer> items = await customerListMaker();
+    return Container(
+      child: Form(
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildProfilePicField(),
+                SizedBox(height: getHeight / 40),
+                buildNameFormField(),
+                SizedBox(height: getHeight / 20),
+                buildSurnameFormField(),
+                SizedBox(height: getHeight / 20),
+                buildEmailFormField(),
+                SizedBox(height: getHeight / 20),
+                buildPhoneNumberFormField(),
+                SizedBox(height: getHeight / 20),
+                defaultButton(
+                  onPress: () async {
+                     _validationKey.currentState?.validate();
+                    if (name.text.length == 0) {
+                      nameFocus.requestFocus();
+                    } else if (surname.text.length == 0) {
+                      surnameFocus.requestFocus();
+                    }else if (email.text.length==0) {
+                      emailFocus.requestFocus();
+                    }else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(email.text)) {
+                      emailFocus.requestFocus();
+                    } else if (phoneN.text.length == 0) {
+                      phoneNumberFocus.requestFocus();
+                    } else if (phoneN.text.length < 10 &&
+                        phoneN.text.length > 0) {
+                      phoneNumberFocus.requestFocus();
+                    }  else {
+                      List<String> emails = [];
+                      List<String> phones = [];
+                      List<Customer> items = await customerListMaker();
 
-                    for (var element in items) {
-                      if (element.email == email.text) {
-                        continue;
+                      for (var element in items) {
+                        if (element.email == email.text) {
+                          continue;
+                        } else {
+                          emails.add(element.email);
+                        }
+                      }
+                      for (var element in items) {
+                        if (element.phone == phoneN.text) {
+                          continue;
+                        } else {
+                          phones.add(element.phone);
+                        }
+                      }
+                      if (emails.contains(email.text)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: CustomSnackBarContent(
+                                errorMessage:
+                                    "The email already exists, try another email"),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ),
+                        );
+                      }else if(phones.contains(phoneN.text)){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: CustomSnackBarContent(
+                                errorMessage:
+                                    "The number already exists, try another number"),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ),
+                        );
                       } else {
-                        emails.add(element.email);
+                        Map<String, String> users = {
+                          'name': name.text,
+                          'phone_number': phoneN.text,
+                          'surname': surname.text,
+                          'email': email.text,
+                        };
+
+                        dbRef
+                            .child(widget.userKey)
+                            .update(users)
+                            .then((value) => {});
+                        FirebaseAuth.instance.currentUser!.updateDisplayName(name.text);
+                        FirebaseAuth.instance.currentUser!.updateEmail(email.text);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SplashScreenPAnimated(),
+                          ),
+                        );
+                        Fluttertoast.showToast(
+                          msg: "Your profile has been edited successfully",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.purple,
+                          textColor: Colors.white,
+                          fontSize: 16,
+                        );
                       }
                     }
-                    for (var element in items) {
-                      if (element.phone == phoneN.text) {
-                        continue;
-                      } else {
-                        phones.add(element.phone);
-                      }
-                    }
-                    if (emails.contains(email.text)) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: CustomSnackBarContent(
-                              errorMessage:
-                                  "The email already exists, try another email"),
-                          behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                        ),
-                      );
-                    }else if(phones.contains(phoneN.text)){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: CustomSnackBarContent(
-                              errorMessage:
-                                  "The number already exists, try another number"),
-                          behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                        ),
-                      );
-                    } else {
-                      Map<String, String> users = {
-                        'name': name.text,
-                        'phone_number': phoneN.text,
-                        'surname': surname.text,
-                        'email': email.text,
-                      };
-
-                      dbRef
-                          .child(widget.userKey)
-                          .update(users)
-                          .then((value) => {});
-                      FirebaseAuth.instance.currentUser!.updateDisplayName(name.text);
-                      FirebaseAuth.instance.currentUser!.updateEmail(email.text);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SplashScreenPAnimated(),
-                        ),
-                      );
-                      Fluttertoast.showToast(
-                        msg: "Your profile has been edited successfully",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.purple,
-                        textColor: Colors.white,
-                        fontSize: 16,
-                      );
-                    }
-                  }
-                },
-                text: 'Save Changes',
-              ),
-              SizedBox(height: getHeight / 50),
-            ],
+                  },
+                  text: 'Save Changes',
+                ),
+                SizedBox(height: getHeight / 50),
+              ],
+            ),
           ),
         ),
       ),
@@ -444,7 +465,7 @@ class _EditProfileState extends State<EditProfile> {
           padding: EdgeInsets.all(4),
           child: Text('+90'),
         ),
-        labelText: "phone Number",
+        labelText: "Phone number",
         floatingLabelStyle: TextStyle(color: Colors.purple),
         labelStyle: TextStyle(color: Colors.grey[500]),
         hintText: "Enter your phone",

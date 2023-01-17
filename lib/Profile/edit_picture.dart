@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -27,8 +28,26 @@ class _EditProfilePictureState extends State<EditProfilePicture> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text('Profile Picture'),
+        title: Text(
+          'EDIT PROFILE PICTURE',
+          style: GoogleFonts.bebasNeue(
+            color: Colors.purple[700],
+            fontSize: 20,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          )
+        ),
+        backgroundColor: Colors.grey[300],
+        elevation: 0,
       ),
       body: SafeArea(
         child: SizedBox(
@@ -80,7 +99,7 @@ class EditPicture extends StatefulWidget {
 class _EditPictureState extends State<EditPicture> {
   Uint8List? _image;
   String photo1 = FirebaseAuth.instance.currentUser!.photoURL.toString();
-  String photo2 = '';
+  String photo2 = 'https://firebasestorage.googleapis.com/v0/b/mobileprogramming-c9890.appspot.com/o/files%2Ficon.jpg?alt=media&token=c84cb5f8-1e38-4a0b-b83f-f3d6cd2d2cf0';
 
   bool newPhotoExists = false;
   bool oldPhotoExists = true;
@@ -92,44 +111,47 @@ class _EditPictureState extends State<EditPicture> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Expanded(
-        child: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(height: getHeight / 40),
-                buildProfilePic(),
-                buildChoosenProfilePic(),
-                SizedBox(height: getHeight / 40),
-                defaultButton(
-                    text: 'Upload',
-                    onPress: () async {
-                      Uint8List? s = _image;
-                      if (s != null) {
-                        String url = await uploadImage(s);
-                        FirebaseAuth.instance.currentUser?.updatePhotoURL(url);
-                        FirebaseDatabase.instance.ref().child('Users/${widget.userKey}').update({
-                          'photoURL': url
-                        });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SplashScreenPAnimated(),
-                          ),
-                        );
-                        Fluttertoast.showToast(
-                          msg: "Photo Uploaded",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.purple,
-                          textColor: Colors.white,
-                          fontSize: 16,
-                        );
-                      }
-                    })
-              ]),
+    return Container(
+      color: Colors.grey[300],
+      child: Form(
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(height: getHeight / 40),
+                  buildProfilePic(),
+                  buildChoosenProfilePic(),
+                  SizedBox(height: getHeight / 40),
+                  defaultButton(
+                      text: 'Upload',
+                      onPress: () async {
+                        Uint8List? s = _image;
+                        if (s != null) {
+                          String url = await uploadImage(s);
+                          FirebaseAuth.instance.currentUser?.updatePhotoURL(url);
+                          FirebaseDatabase.instance.ref().child('Users/${widget.userKey}').update({
+                            'photoURL': url
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SplashScreenPAnimated(),
+                            ),
+                          );
+                          Fluttertoast.showToast(
+                            msg: "Photo Uploaded",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.purple,
+                            textColor: Colors.white,
+                            fontSize: 16,
+                          );
+                        }
+                      })
+                ]),
+          ),
         ),
       ),
     );
