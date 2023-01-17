@@ -34,11 +34,11 @@ class _Question_PageState extends State<Question_Page> {
       });
       if (seconds == 0) {
         if (minutes==0){
+          timer.cancel();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Result()),
           );
-          timer.cancel();
         }else{
           setState(() {
             minutes--;
@@ -169,6 +169,7 @@ class _Question_PageState extends State<Question_Page> {
                         child: MaterialButton(
                           onPressed: () {
                             if (MyTest.count == 11) {
+                              MyTest.checkQuestion("a");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Result()),
@@ -213,6 +214,7 @@ class _Question_PageState extends State<Question_Page> {
                         child: MaterialButton(
                           onPressed: () {
                             if (MyTest.count == 11) {
+                              MyTest.checkQuestion("b");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Result()),
@@ -266,6 +268,7 @@ class _Question_PageState extends State<Question_Page> {
                         child: MaterialButton(
                           onPressed: () {
                             if (MyTest.count == 11) {
+                              MyTest.checkQuestion("c");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Result()),
@@ -310,6 +313,7 @@ class _Question_PageState extends State<Question_Page> {
                         child: MaterialButton(
                           onPressed: () {
                             if (MyTest.count == 11) {
+                              MyTest.checkQuestion("d");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Result()),
