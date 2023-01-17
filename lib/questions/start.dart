@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lancode/questions/question_page.dart';
 
 import 'Questions.dart';
@@ -14,8 +15,8 @@ class Start extends StatefulWidget {
 class _StartState extends State<Start> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {},
@@ -25,6 +26,13 @@ class _StartState extends State<Start> {
               )),
           backgroundColor: Colors.grey[300],
           elevation: 0,
+          title: Text(
+          'PYTHON',
+          style: GoogleFonts.bebasNeue(
+            color: Colors.purple[700],
+            fontSize: 30,
+          ),
+        ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -219,8 +227,7 @@ class _StartState extends State<Start> {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
 

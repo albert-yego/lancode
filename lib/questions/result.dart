@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lancode/main.dart';
 import 'package:lancode/questions/question_page.dart';
 import 'package:lancode/questions/start.dart';
@@ -19,20 +20,35 @@ class Result extends StatefulWidget {
 class _ResultState extends State<Result> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: null,
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
+        appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Start()),
+              );},
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              )),
+              backgroundColor: Colors.grey[300],
+          elevation: 0,
+        ),
         body: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 150),
+            Padding(
+              padding: EdgeInsets.only(top: 100),
               child: Expanded(
 
                 child: Text("Lesson Evaluation",
 
-
+                  style: GoogleFonts.bebasNeue(
+                    color: Colors.purple,
+                    fontSize: 30.0,
+                  ),
                   textAlign:TextAlign.center,
-              ),
+                ),
             ),
             ),
             Expanded(
@@ -194,7 +210,6 @@ class _ResultState extends State<Result> {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

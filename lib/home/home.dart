@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lancode/Profile/profile_page.dart';
 import 'package:lancode/components/default_button.dart';
 import 'package:lancode/home/splash/splash.dart';
+import 'package:lancode/questions/start.dart';
 
 import '../util/constants.dart';
 
@@ -59,14 +60,14 @@ class _homePageState extends State<homePage> {
             ),
             SizedBox(height: getHeight / 10),
             defaultButton(
-              text: 'Lessons', 
+              text: 'Python', 
               onPress: (){
-                // Navigator.pushReplacement(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => ,
-                //   ),
-                // );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Start(),
+                  ),
+                );
               }
             ),
         ]),

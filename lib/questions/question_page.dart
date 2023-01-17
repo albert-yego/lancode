@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lancode/questions/result.dart';
 import 'package:lancode/questions/start.dart';
 
@@ -55,10 +56,9 @@ class _Question_PageState extends State<Question_Page> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
         appBar: AppBar(
-
           leading: IconButton(
               onPressed: () {Navigator.push(
                 context,
@@ -68,6 +68,13 @@ class _Question_PageState extends State<Question_Page> {
                 Icons.arrow_back_ios,
                 color: Colors.black,
               )),
+          title: Text(
+          'QUESTIONS',
+          style: GoogleFonts.bebasNeue(
+            color: Colors.purple[700],
+            fontSize: 30,
+          ),
+        ),
 
           backgroundColor: Colors.grey[300],
           elevation: 0,
@@ -358,7 +365,6 @@ class _Question_PageState extends State<Question_Page> {
             )
           ],
         ),
-      ),
-    );
+      );
   }
 }
