@@ -32,6 +32,7 @@ class _homePageState extends State<homePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.grey[300],
         title: Text(
           'LANCODE',
