@@ -61,7 +61,7 @@ class _StartState extends State<Start> {
                         child: Container(
                             height: 50,
                             child: Image.asset(
-                                "assets/img/2055753.png")),
+                                "assets/img/l1.png")),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 18),
@@ -97,7 +97,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/1857147.png")),
+                              "assets/img/l2.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),
@@ -134,7 +134,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/562626.png")),
+                              "assets/img/l3.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),
@@ -172,7 +172,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/13845.png")),
+                              "assets/img/l4.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),
@@ -209,7 +209,7 @@ class _StartState extends State<Start> {
                       child: Container(
                           height: 50,
                           child: Image.asset(
-                              "assets/img/software-icon-13.png")),
+                              "assets/img/l5.png")),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 18),
