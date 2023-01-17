@@ -35,12 +35,7 @@ class _Question_PageState extends State<Question_Page> {
       if (seconds == 0) {
         if (minutes==0){
           timer.cancel();
-          if(!timer.isActive){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Result()),
-            );
-          }
+          
         }else{
           setState(() {
             minutes--;
