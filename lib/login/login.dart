@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:lancode/components/default_button.dart';
 import 'package:lancode/components/default_textfield.dart';
 import 'package:lancode/register/register.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../components/custom_snackbar.dart';
 
 
 class loginPage extends StatefulWidget {
@@ -106,33 +109,66 @@ class _loginPageState extends State<loginPage> {
               SizedBox(height: getHeight/50),
               SizedBox(height: getHeight/50),
           
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Not a member?',
-                    style: TextStyle(color: Colors.grey[700]),
-                  ),
-                  SizedBox(height: getHeight/50),
-                  GestureDetector(
-                    onTap: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => registerPage(),
-                          ));
-                    },
-                    child: Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+              Visibility(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Not a member?',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                    SizedBox(height: getHeight/50),
+                    GestureDetector(
+                      onTap: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => registerPage(),
+                            ));
+                      },
+                      child: Text(
+                        'Register now',
+                        style: TextStyle(
+                          color: Colors.purple,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  )
-                ],
-              )
+                  ],
+                ),
+                visible: emailVisibility,
+              ),
+              Visibility(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Forgot Password?',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                    SizedBox(height: getHeight/50),
+                    GestureDetector(
+                      onTap: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => registerPage(),
+                            ));
+                      },
+                      child: Text(
+                        'Reset password here',
+                        style: TextStyle(
+                          color: Colors.purple,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                visible: passwordVisibility,
+              ),
             ],
           ),
         ),
@@ -140,23 +176,64 @@ class _loginPageState extends State<loginPage> {
     );
   }
   
-  void signUserIn() {
-    auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-    
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => SplashScreenHAnimated()
-      )
-    ).then((value) => null);
-    Fluttertoast.showToast(
-      msg: "You are registered successfully",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.purple,
-      textColor: Colors.white,
-      fontSize: 16,
-    );
+  void signUserIn() async{
+    try{
+      await auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => SplashScreenHAnimated()
+        )
+      ).then((value) => null);
+      Fluttertoast.showToast(
+        msg: "You are registered successfully",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.purple,
+        textColor: Colors.white,
+        fontSize: 16,
+      );
+    }on FirebaseAuthException catch (e){
+      if(e.code == "user-not-found"){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackBarContent(
+              errorMessage:
+                  "User doesn't exist."),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ));
+      }
+      if(e.code == "wrong-password"){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackBarContent(
+              errorMessage:
+                  "Incorrect password."),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ));
+      }
+      if(e.code == "invalid-email"){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackBarContent(
+              errorMessage:
+                  "Invalid email."),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ));
+      }
+    }catch (e){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: CustomSnackBarContent(
+              errorMessage:
+                  "Technical issue. try again."),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ));
+    }
   }
 
   Visibility emailField(){
@@ -165,6 +242,7 @@ class _loginPageState extends State<loginPage> {
         keyboardType: TextInputType.text,
         controller: emailController,
         showCursor: true,
+        cursorColor: Colors.purple,
         decoration: InputDecoration(
           prefix: Padding(
             padding: EdgeInsets.all(4),
@@ -198,6 +276,7 @@ class _loginPageState extends State<loginPage> {
         keyboardType: TextInputType.text,
         controller: passwordController,
         showCursor: true,
+        cursorColor: Colors.purple,
         decoration: InputDecoration(
           prefix: Padding(
             padding: EdgeInsets.all(4),

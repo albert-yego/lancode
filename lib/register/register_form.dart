@@ -25,7 +25,6 @@ class _registerFormState extends State<registerForm> {
   final passwordController = TextEditingController();
 
   final _validationKey = GlobalKey<FormState>();
-  bool fieldCorrect = false;
   final nameFocus = FocusNode();
   final surnameFocus = FocusNode();
   final emailFocus = FocusNode();
@@ -43,7 +42,6 @@ class _registerFormState extends State<registerForm> {
   }
 
   void dispose() {
-    Focus.of(context).unfocus();
     super.dispose();
   }
 
@@ -52,6 +50,7 @@ class _registerFormState extends State<registerForm> {
     return Form(
       child: Expanded(
         child: SingleChildScrollView(
+          key: _validationKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -74,16 +73,16 @@ class _registerFormState extends State<registerForm> {
                     nameFocus.requestFocus();
                   } else if (surnameController.text.length == 0) {
                     surnameFocus.requestFocus();
-                  } else if (phoneNumberController.text.length == 0) {
-                    phoneNumberFocus.requestFocus();
-                  } else if (phoneNumberController.text.length < 10 &&
-                      phoneNumberController.text.length > 0) {
-                    phoneNumberFocus.requestFocus();
                   }else if (emailController.text.length==0) {
                     emailFocus.requestFocus();
                   }else if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                       .hasMatch(emailController.text)) {
                     emailFocus.requestFocus();
+                  } else if (phoneNumberController.text.length == 0) {
+                    phoneNumberFocus.requestFocus();
+                  } else if (phoneNumberController.text.length < 10 &&
+                      phoneNumberController.text.length > 0) {
+                    phoneNumberFocus.requestFocus();
                   }else if (passwordController.text.length==0) {
                     passwordFocus.requestFocus();
                   } else {
@@ -115,17 +114,19 @@ class _registerFormState extends State<registerForm> {
       ),
     );
   }
-  void signup(){
+  void signup() async{
     try{
+      await auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
       Map user ={
         'name': nameController.text,
         'surname': surnameController.text,
+        'photoURL': 'https://firebasestorage.googleapis.com/v0/b/mobileprogramming-c9890.appspot.com/o/files%2Ficon.jpg?alt=media&token=c84cb5f8-1e38-4a0b-b83f-f3d6cd2d2cf0',
         'email': emailController.text,
+        'auth_uid': '',
         'phone_number': phoneNumberController.text,
         'password': passwordController.text
       };
       dbRef.push().set(user);
-      auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
     }on FirebaseAuthException catch (e){
       if(e.code=='email-already-in-use'){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -163,17 +164,19 @@ class _registerFormState extends State<registerForm> {
     
   }
 
-  void _reqFocus(){
-    setState(() {
-      FocusScope.of(context).requestFocus(nameFocus);
-    });
-  }
+  // void _reqFocus(){
+  //   setState(() {
+  //     FocusScope.of(context).requestFocus(nameFocus);
+  //   });
+  // }
   
   TextFormField nameField() {
     return TextFormField(
       keyboardType: TextInputType.text,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: nameController,
       showCursor: true,
+      cursorColor: Colors.purple,
       validator: (value) {
         if(value!.isEmpty){
           return 'Please enter name';
@@ -197,7 +200,6 @@ class _registerFormState extends State<registerForm> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.purple),
         ),
-        errorText: nameController.text.length == 0 ? 'Name is required' : null,
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red)
         ),
@@ -218,8 +220,10 @@ class _registerFormState extends State<registerForm> {
   TextFormField surnameField() {
     return TextFormField(
       keyboardType: TextInputType.text,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: surnameController,
       showCursor: true,
+      cursorColor: Colors.purple,
       validator: (value) {
         if(value!.isEmpty){
           return 'Please enter surname';
@@ -264,6 +268,7 @@ class _registerFormState extends State<registerForm> {
     return TextFormField(
       keyboardType: TextInputType.text,
       controller: emailController,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       showCursor: true,
       validator: (value) {
         if(value!.isEmpty){
@@ -312,7 +317,9 @@ class _registerFormState extends State<registerForm> {
     return TextFormField(
       keyboardType: TextInputType.number,
       controller: phoneNumberController,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       showCursor: true,
+      cursorColor: Colors.purple,
       maxLength: 10,
       validator: (value) {
         if(value!.isEmpty){
@@ -361,7 +368,9 @@ class _registerFormState extends State<registerForm> {
     return TextFormField(
       keyboardType: TextInputType.text,
       controller: passwordController,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       showCursor: true,
+      cursorColor: Colors.purple,
       validator: (value) {
         if(value!.isEmpty){
           return 'Please enter password';

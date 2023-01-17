@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lancode/Profile/profile_page.dart';
 import 'package:lancode/home/home.dart';
 import 'package:lancode/login/login.dart';
 import 'package:lancode/util/constants.dart';
@@ -6,8 +7,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
-class SplashScreenLAnimated extends StatelessWidget {
-  const SplashScreenLAnimated({super.key});
+class SplashScreenPAnimated extends StatelessWidget {
+  const SplashScreenPAnimated({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class SplashScreenLAnimated extends StatelessWidget {
       splash: Lottie.asset("assets/json files/lancode.json"),
       splashIconSize: 450,
       backgroundColor: Colors.white,
-      nextScreen: homePage(),
+      nextScreen: profilePage(),
       pageTransitionType: PageTransitionType.bottomToTop,
     );
   }

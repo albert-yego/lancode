@@ -39,6 +39,9 @@ dependencies:
   firebase_core: ^2.4.0
   firebase_database: ^10.0.8
   firebase_auth: ^4.2.4
+  firebase_storage: ^11.0.10
+  image_picker: ^0.8.6
+  base_x: ^2.0.0
   masked_text: ^1.0.0
   get: ^4.6.5
   lottie: ^2.1.0
